@@ -110,14 +110,14 @@ class Chat {
     this.zone.classList.add('ok'); this.zone.textContent = this.t('scanOk', { to: short(other.addr) });
     this.bubble(this.t('scanned', { to: short(other.addr) }), true);
     await this.say(this.t('amount'));
-    this.actions.innerHTML = `<input type="text" inputmode="decimal" autocomplete="off" placeholder="Máx. 100"><button>${this.t('send')}</button>`;
+    this.actions.innerHTML = `<input type="number" step="any" min="0" max="100" inputmode="decimal" autocomplete="off" placeholder="Máx. 100"><button>${this.t('send')}</button>`;
     const inp = $('input', this.actions), go = async () => {
       const n = Number(inp.value.replace(',', '.'));
       if (!inp.value || !(n > 0) || n > 100) return this.say(this.t('badAmount'));
       this.actions.innerHTML = ''; this.bubble(n + ' XLM', true); this.summary(n);
     };
-    inp.oninput = () => inp.value = inp.value.replace(/[^0-9.,]/g, ''); inp.focus();
-    $('button', this.actions).onclick = go; inp.onkeydown = e => e.key === 'Enter' && go();
+    inp.focus();
+    $('button', this.actions).onclick = go; inp.addEventListener('keydown', e => { if (e.key === 'Enter') go(); }); // no devolver false: cancelaría el tecleo
   }
   async summary(amt) {
     await this.say(this.t('summary', { from: short(this.addr), to: short(this.peer.addr), amt }));
