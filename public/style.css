@@ -1,3 +1,4 @@
+[hidden]{display:none!important}
 :root{--cream:#f3e6cf;--brown:#4a2c20;--clay:#a0522d;--wa:#d8f0c8;--night:#0e1530;--star:#ffd45e;--ok:#3ddc84}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);font-family:Nunito,sans-serif;color:var(--brown);min-height:100vh}
 #reset{position:fixed;top:12px;right:12px;z-index:9;border:2px solid var(--brown);background:var(--cream);color:var(--brown);border-radius:20px;padding:6px 14px;font:700 13px Nunito;cursor:pointer}
@@ -39,3 +40,5 @@ button{font:700 14px Nunito;cursor:pointer}.pick button,#actions button{backgrou
 #hint{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:var(--brown);color:#fff;padding:8px 16px;border-radius:20px;font-weight:700;display:none;z-index:9}
 @media(max-width:900px){#stage{flex-direction:column;gap:28px}#hint:not([hidden]){display:block}.enter{animation-name:enterM}@keyframes enterM{from{opacity:0;transform:translateY(60px) scale(.9);filter:brightness(2)}}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+.sticker{align-self:flex-start;margin-left:34px;animation:up .3s ease}.sticker img{width:120px;display:block;filter:drop-shadow(0 2px 3px #4a2c2040)}

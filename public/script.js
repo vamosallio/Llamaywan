@@ -20,6 +20,13 @@ function buttons(opts) { // opts: [label, handler]
   actions.innerHTML = '';
   opts.forEach(([label, fn]) => { const b = document.createElement('button'); b.textContent = label; b.onclick = () => { actions.innerHTML = ''; bubble(label, true); fn(); }; actions.appendChild(b); });
 }
+const LLAMA = 'lumi'; // llama elegida: stickers en img/stickers/<llama>/<nombre>.png
+async function sticker(name) {
+  await sleep(500);
+  const el = document.createElement('div'); el.className = 'sticker';
+  el.innerHTML = `<img src="img/stickers/${LLAMA}/${name}.png" alt="">`; msgs.appendChild(el);
+  el.querySelector('img').onload = scroll; scroll();
+}
 const end = async t => { await say(t); actions.innerHTML = ''; state = 'END'; };
 
 // Selector de llama
@@ -31,6 +38,7 @@ document.querySelectorAll('.pick button').forEach(b => b.onclick = () => {
 
 async function msg1() {
   state = 'MSG1';
+  await sticker('pizarra');
   await say('¡Hola! 👋 Soy Lumi, tu instructora. Vamos a aprender Stellar en una sola lección. Al final harás una transferencia real en la red de pruebas. No necesitas experiencia previa. ¿Empezamos? 🚀');
   buttons([['Sí, vamos', msg2], ['Tengo una duda', async () => {
     await say('Sin problema. Esta lección dura ~5 minutos y no usas dinero real. ¿Empezamos?');
@@ -40,6 +48,7 @@ async function msg1() {
 async function msg2() {
   state = 'MSG2';
   await say('Stellar es una red digital que permite enviar, recibir e intercambiar activos digitales entre cuentas. 🌐\n\nImagina que quieres enviar valor a alguien en otra ciudad. Stellar registra esa operación en una red compartida, sin que cada uno tenga su propio registro. A eso se le llama blockchain.\n\nVamos a comprobarlo 👇');
+  await sticker('lentes');
   await say('¿Para qué sirve la red Stellar?\nA) Para enviar, recibir e intercambiar activos digitales.\nB) Para almacenar fotos de WhatsApp.\nC) Para reemplazar apps de mensajería.');
   const ans = ok => async () => { await say(ok ? '¡Exacto! 🎉' : 'Casi. Stellar sirve para operar con activos digitales. La respuesta correcta es A.'); msg3(); };
   buttons([['A', ans(true)], ['B', ans(false)], ['C', ans(false)]]);
@@ -47,6 +56,7 @@ async function msg2() {
 async function msg3() {
   state = 'MSG3';
   await say('Ahora XLM. 💡\n\nXLM (o lumen) es el activo nativo de Stellar. Sirve, entre otras cosas, para pagar las pequeñas comisiones de las transacciones.\n\n⚠️ Y algo muy importante: tu clave secreta autoriza operaciones. Nunca la compartas por chat, ni conmigo ni con nadie.');
+  await sticker('grafico');
   await say('Si alguien te pide tu clave secreta para "enviarte XLM", ¿qué haces?\n\nA) Se la envío por WhatsApp.\nB) La publico para que me ayuden.\nC) No la comparto nunca.');
   const ans = ok => async () => { await say(ok ? '¡Correcto! 🔐' : 'Cuidado: la clave secreta permite autorizar operaciones sobre tu cuenta, por eso nunca se comparte. La respuesta correcta es C.'); msg4(); };
   buttons([['A', ans(false)], ['B', ans(false)], ['C', ans(true)]]);
@@ -65,6 +75,7 @@ async function msg4() {
 }
 async function msg5() {
   state = 'MSG5';
+  await sticker('normal');
   await say(`¡Llegó el momento de tu primera transferencia! 🤝\n\nTenemos un destinatario de prueba asignado: ${short(accts.receiverPublicKey)}.\n\n¿Continuamos con esta persona?`);
   buttons([['SÍ', askAmount], ['NO', async () => {
     await say('Sin problema. En esta demo usamos un destinatario fijo. ¿Continuamos de todas formas?');
@@ -112,6 +123,7 @@ async function sendTx() {
      <div class="kv"><small>Destinatario</small>${d.receiverBalanceBefore} → <b>${d.receiverBalanceAfter}</b> XLM</div>
      <a href="${d.explorerUrl}" target="_blank" rel="noopener">Ver en explorador</a>`;
     state = 'MSG8';
+    await sticker('hola');
     await say(`🎉 ¡Transferencia completada en Stellar Testnet!\n\nGuarda este identificador:\n<code>${d.hash}</code>\n\nAprendiste qué es Stellar, qué es XLM, por qué la clave secreta es privada, y cómo se ve una transacción verificada en la blockchain.\n\n¡Gracias por aprender conmigo! 🌟🦙`, true);
   } catch (e) {
     B.innerHTML = `<h3 class="err">No se pudo completar</h3><p class="err">${e.message}</p><button class="btn" id="retry">Reintentar</button>`;
