@@ -1,14 +1,10 @@
-# Llamaywan — demo educativa (simulada)
+# Llamaywan — demo educativa (Stellar Testnet)
 
-Dos celulares en pantalla, cada uno con la lección guiada por una llama (Lumi/español, Wara/aymara, Quyllur/quechua).
-Al final, una persona arrastra el QR de la otra hasta su zona de escaneo y se simula la transferencia; el botón
-"Ver en Stellar Testnet" abre el panel azul.
+Dos celulares en pantalla con la lección (Lumi/es, Wara/ay, Quyllur/qu). Al final se hace una transferencia REAL en Stellar Testnet
+(fondos ficticios) entre las dos cuentas: se arrastra el QR de una persona a la zona de escaneo de la otra. Luego se invita a devolver el envío.
 
-Requisitos: Node 18+. `npm install && npm start` y abrir http://localhost:3000. Pensada para pantalla de PC.
+Requisitos: Node 18+ e internet. `npm install && npm start`, abrir http://localhost:3000 (en Codespaces, el puerto 3000 que se reenvía).
+Plan B sin internet: http://localhost:3000/?sim=1 (todo simulado y rotulado como tal).
 
-## Qué es simulado
-Todo: cuentas, QR (no es escaneable), saldos, hash y confirmación. No hay conexión con Stellar.
-## Idiomas
-Textos en `public/lessons.js`. Solo español está completo; completa `ay` y `qu` (lo que falte cae a español).
-## Stickers
-`public/img/stickers/<llama>/{intro,explain,chart,normal,hola}.png`
+Cada celular crea su cuenta con Friendbot al terminar la parte de XLM. Las claves secretas nunca salen del servidor.
+Limitaciones: Testnet puede reiniciarse; sesiones en memoria; una transacción por celular. Textos en `public/lessons.js`.
