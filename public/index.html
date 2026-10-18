@@ -1,0 +1,23 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Llamas Stellar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<button id="reset" onclick="location.reload()">Reiniciar demo</button>
+<main id="stage">
+ <section class="phone" id="phoneA"><div class="notch"></div>
+  <div id="select"><h1>Llamas Stellar</h1><p>Elige tu instructora</p>
+   <div class="llamas">
+    <div class="pick"><img src="img/llama-lumi-full.png" alt="Lumi"><b>Lumi</b><small>Español</small><button data-l="lumi">Elegir</button></div>
+    <div class="pick"><img src="img/llama-wara-full.png" alt="Wara"><b>Wara</b><small>Aymara</small><button data-l="wara">Elegir</button></div>
+    <div class="pick"><img src="img/llama-quyllur-full.png" alt="Quyllur"><b>Quyllur</b><small>Quechua</small><button data-l="quyllur">Elegir</button></div>
+   </div><div id="soon" hidden></div></div>
+  <div id="chat" hidden>
+   <header><img src="img/llama-lumi.png" alt=""><div><b>Lumi 🦙</b><small>Instructora de Stellar</small></div></header>
+   <div id="msgs"></div><div id="actions"></div></div>
+ </section>
+ <section class="phone dark" id="phoneB" hidden><div class="notch"></div>
+  <header><div><b>Stellar Testnet</b><small>Red de pruebas</small></div><span class="badge">TESTNET</span></header>
+  <div id="panelB"></div></section>
+</main>
+<div id="hint" hidden>↓ panel de transacción</div>
+<script src="script.js"></script></body></html>
