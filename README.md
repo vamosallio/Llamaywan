@@ -8,3 +8,5 @@ Plan B sin internet: http://localhost:3000/?sim=1 (todo simulado y rotulado como
 
 Cada celular crea su cuenta con Friendbot al terminar la parte de XLM. Las claves secretas nunca salen del servidor.
 Limitaciones: Testnet puede reiniciarse; sesiones en memoria; una transacción por celular. Textos en `public/lessons.js`.
+
+Objetivos a Futuro : Llevar el chatbot instructor a Whatsapp y/o Telegram.
